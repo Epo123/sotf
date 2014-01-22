@@ -50,7 +50,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
     public function shoppingcart() {
-        return $this->hasOne
+        return $this->hasOne('Shoppingcart');
     }
 
 }
