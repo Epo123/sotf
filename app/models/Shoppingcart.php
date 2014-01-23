@@ -9,6 +9,10 @@ class Shoppingcart extends Eloquent {
      */
     protected $table = 'shoppingcarts';
 
+    public function user() {
+        return $this->belongsto('User');
+    }
+
     public function shoppingcartProducts() {
         return $this->hasMany('ShoppingcartProduct');
     }

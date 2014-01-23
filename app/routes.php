@@ -14,7 +14,7 @@
 Route::get('/', 'HomeController@showWelcome');
 
 Route::resource('api/products', 'APIProductController');
-Route::post('api/login', 'APILoginController');
+Route::post('api/login', 'APILoginController@APILogin');
 
 Route::get('login', 'LoginController@showLogin');
 Route::post('login', 'LoginController@doLogin');
