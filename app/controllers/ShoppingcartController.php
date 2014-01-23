@@ -2,6 +2,13 @@
 
 class ShoppingcartController extends BaseController {
 
+    public function showShoppinglist() {
+
+        $usersshoppingcart = Auth::user()->shoppingcart()->first();
+
+        return View::make('shoppinglist')->with('products', ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->get());
+    }
+
     public function putInShoppingcart($code) {
         $user = Auth::user();
 

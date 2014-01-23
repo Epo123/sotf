@@ -20,4 +20,6 @@ Route::get('login', 'LoginController@showLogin');
 Route::post('login', 'LoginController@doLogin');
 Route::get('logout', 'LoginController@doLogout');
 
+Route::get('shoppinglist', 'ShoppingcartController@showShoppinglist');
+
 Route::get('putinshoppingcart/{code}', 'ShoppingcartController@putInShoppingcart');
