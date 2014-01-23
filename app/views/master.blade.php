@@ -14,6 +14,7 @@
 
     @if(Auth::check())
     <a href="{{URL::to('logout')}}" class="pull-right btn btn-danger">Logout</a>
+    <a href="{{URL::to('shoppingcart')}}" class="pull-right btn btn-info">Shoppinglist</a>
     @else
     <a href="{{URL::to('login')}}" class="pull-right btn btn-info">Login</a>
     @endif

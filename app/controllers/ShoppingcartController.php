@@ -13,25 +13,30 @@ class ShoppingcartController extends BaseController {
             return 'has none';
         }
 
-        $usersshoppingcart = $user->shoppingcart()->get();
+        $product = Product::where('ean_code', '=', $code)->first();
 
-        dd($usersshoppingcart);
+        $usersshoppingcart = $user->shoppingcart()->first();
+
+        if(ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->where('product_id', '=', $product->id)->count() >= 1) {
+
+            $shopcartproduct = ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->where('product_id', '=', $product->id)->first();
+
+            $shopcartproduct->quantity = $shopcartproduct->quantity + 1;
+
+            $shopcartproduct->save();
+            return Redirect::to('/');
+        }
 
         $shopcartproduct = new ShoppingcartProduct();
-
-        $shopcartproduct->shoppingcart()->associate($shopcartproduct);
-
-        $product = Product::where('ean_code', '=', $code)->first();
 
         $shopcartproduct->product_id = $product->id;
 
         $shopcartproduct->quantity = 1;
 
-        $shopcartproduct->shoppingcart_id = $product->id;
+        $shopcartproduct->shoppingcart_id = $usersshoppingcart->id;
 
         $shopcartproduct->save();
-
-        return $user->shoppingcart();
+        return Redirect::to('/');
 
     }
 }
