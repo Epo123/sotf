@@ -18,7 +18,6 @@ Route::post('api/login', 'APILoginController@APILogin');
 
 Route::post('api/cart/', 'APICheckoutController@sendCartToUser');
 Route::post('api/checkout/{code}', 'APICheckoutController@receiveCart');
-Route::post('api/checkout/{code}/{userid}', 'APICheckoutController@receiveConfirmation');
 
 Route::get('login', 'LoginController@showLogin');
 Route::post('login', 'LoginController@doLogin');
