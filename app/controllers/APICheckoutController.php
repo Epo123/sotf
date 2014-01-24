@@ -25,7 +25,7 @@ class APICheckoutController extends \BaseController {
 
 			$response = Response::json(array(
 				'cart' => $shoppingList,
-				'status' => 1
+				'status' => '1'
 			));
 			return $response;
 		}
@@ -34,7 +34,7 @@ class APICheckoutController extends \BaseController {
 
 
 	public function receiveCartFromApp($code){
-		$cashregister = CashRegister::where("code", "=", $id)->get();
+		$cashregister = CashRegister::where("code", "=", $code)->get();
 		if (Auth::validate(array('email' => Input::get('email'), 'password' => Input::get('password')))){
 			$productAndAmount = Input::get("products");
 
@@ -42,8 +42,9 @@ class APICheckoutController extends \BaseController {
 
 
 			return Response::json(array('status' => '1'));
-		}else{
-			return Response::json(array('status' => '0'));
 		}
+		
+		return Response::json(array('status' => '0'));
+
 	}
 }
