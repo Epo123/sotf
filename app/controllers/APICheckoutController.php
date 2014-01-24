@@ -10,24 +10,26 @@ class APICheckoutController extends \BaseController {
 		$password = Input::get("password");
 
 		$shoppingCart = ShoppingCart::where("user_id", "=", $userid)->get()->first();
-
-		if (Auth::validate(array('email' => $email, 'password' => $password))){
-			
-			$products = $shoppingCart->shoppingCartProducts();
-			$shoppingList = array();
-			foreach($products as $cartProduct) {
-				$description = array(
-					"name"=>$cartProduct->product()->name, 
-					"required_amount"=>$cartProduct->quantity);
+		if($shoppingCart){
+			if (Auth::validate(array('email' => $email, 'password' => $password))){
 				
-				array_push($shoppingList, $cartProduct->product()->code, $description);
-			}
+				$products = $shoppingCart->shoppingCartProducts;
+				$shoppingList = array();
+				foreach($products as $cartProduct) {
+					$description = array(
+						"ean_code" => $cartProduct->product->ean_code,
+						"name"=>$cartProduct->product->name, 
+						"required_amount"=>$cartProduct->quantity,
+						"price"=>$cartProduct->product->price_in_cents);
+					array_push($shoppingList, $description);
+				}
 
-			$response = Response::json(array(
-				'cart' => $shoppingList,
-				'status' => '1'
-			));
-			return $response;
+				$response = Response::json(array(
+					'cart' => $shoppingList,
+					'status' => '1'
+				));
+				return $response;
+			}
 		}
 		return Response::json(array('status' => '0'));
 	}
