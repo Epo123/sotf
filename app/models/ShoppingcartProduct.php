@@ -15,4 +15,8 @@ class ShoppingcartProduct extends Eloquent {
         return $this->belongsTo('Shoppingcart');
     }
 
+    public function product() {
+        return $this->belongsTo('Product');
+    }
+
 }

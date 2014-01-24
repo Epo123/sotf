@@ -3,10 +3,17 @@
 class ShoppingcartController extends BaseController {
 
     public function showShoppinglist() {
-
         $usersshoppingcart = Auth::user()->shoppingcart()->first();
 
-        return View::make('shoppinglist')->with('products', ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->get());
+        return View::make('shoppinglist')->with('products', ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->with('product')->get());
+    }
+
+    public function deleteItem($itemcode) {
+        $usersshoppingcart = Auth::user()->shoppingcart()->first();
+
+        ShoppingcartProduct::where('shoppingcart_id', '=', $usersshoppingcart->id)->where('product_id', '=', $itemcode)->delete();
+
+        return Redirect::to('shoppinglist');
     }
 
     public function putInShoppingcart($code) {

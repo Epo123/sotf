@@ -7,8 +7,12 @@
 
 @section('content')
 
+<table class="table">
+    <tr><th>Naam</th><th>Quantity</th></tr>
 @foreach($products as $product)
-{{$product}}
+<tr><td>{{$product->product->name}}</td><td>{{$product->quantity}}</td><td><span class="glyphicon glyphicon-remove" onclick="window.location.href='removefromshoppingcart/{{$product->product->ean_code}}'"></span></td></tr>
 @endforeach
+</table>
+
 
 @stop
