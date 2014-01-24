@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@showWelcome');
 Route::resource('api/products', 'APIProductController');
 Route::post('api/login', 'APILoginController@APILogin');
 
+Route::post('api/cart/', 'APICheckoutController@sendCartToUser');
 Route::post('api/checkout/{code}', 'APICheckoutController@receiveCart');
 Route::post('api/checkout/{code}/{userid}', 'APICheckoutController@receiveConfirmation');
 
