@@ -16,6 +16,9 @@ Route::get('/', 'HomeController@showWelcome');
 Route::resource('api/products', 'APIProductController');
 Route::post('api/login', 'APILoginController@APILogin');
 
+Route::post('api/checkout/{code}', 'APICheckoutController@receiveCart');
+Route::post('api/checkout/{code}/{userid}', 'APICheckoutController@receiveConfirmation');
+
 Route::get('login', 'LoginController@showLogin');
 Route::post('login', 'LoginController@doLogin');
 Route::get('logout', 'LoginController@doLogout');
@@ -24,6 +27,7 @@ Route::get('logout', 'LoginController@doLogout');
 Route::group(array('before' => 'auth'), function() {
     Route::get('shoppinglist', 'ShoppingcartController@showShoppinglist');
     Route::get('removefromshoppingcart/{itemcode}', 'ShoppingcartController@deleteItem');
+    
 });
 
 Route::get('putinshoppingcart/{code}', 'ShoppingcartController@putInShoppingcart');

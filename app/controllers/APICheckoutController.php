@@ -1,79 +1,49 @@
-x<?php
+<?php
 
 class APICheckoutController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
+
+	public function sendCartToUser()
 	{
-		//
+		$userid = Input::get("userid");
+		$email = Input::get("email");
+		$password = Input::get("password");
+
+		$shoppingCart = ShoppingCart::where("user_id", "=", $userid)->get()->first();
+
+		if (Auth::validate(array('email' => $email, 'password' => $password))){
+			
+			$products = $shoppingCart->shoppingCartProducts();
+			$shoppingList = array();
+			for($products as $cartProduct){
+				$description = array(
+					"name"=>$cartProduct->product()->name, 
+					"required_amount"=>$cartProduct->quantity);
+				
+				array_push($shoppingList, $cartProduct->product()->code, $description);
+			}
+
+			$response = Response::json(array(
+				'cart' => $shoppingList,
+				'status' => 1
+			));
+			return $response;
+		}
+		return Response::json(array('status' => '0'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+	public function receiveCartFromApp($code){
+		$cashregister = CashRegister::where("code", "=", $id)->get();
+		if (Auth::validate(array('email' => Input::get('email'), 'password' => Input::get('password')))){
+			$productAndAmount = Input::get("products");
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+			// send to kassa
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
+			return Response::json(array('status' => '1'));
+		}else{
+			return Response::json(array('status' => '0'));
+		}
 	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }
