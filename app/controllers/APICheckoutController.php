@@ -15,7 +15,7 @@ class APICheckoutController extends \BaseController {
 			
 			$products = $shoppingCart->shoppingCartProducts();
 			$shoppingList = array();
-			for($products as $cartProduct){
+			foreach($products as $cartProduct) {
 				$description = array(
 					"name"=>$cartProduct->product()->name, 
 					"required_amount"=>$cartProduct->quantity);
@@ -39,6 +39,7 @@ class APICheckoutController extends \BaseController {
 			$productAndAmount = Input::get("products");
 
 			// send to kassa
+
 
 
 			return Response::json(array('status' => '1'));
