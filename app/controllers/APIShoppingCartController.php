@@ -3,7 +3,7 @@
 class APIShoppingCartController extends \BaseController {
 
 
-	public function sendCartToUser()
+	public function sendCartToApp()
 	{
 		$userid = Input::get("userid");
 		$email = Input::get("email");
@@ -39,11 +39,7 @@ class APIShoppingCartController extends \BaseController {
 		$cashregister = CashRegister::where("code", "=", $code)->get();
 		if (Auth::validate(array('email' => Input::get('email'), 'password' => Input::get('password')))){
 			$productAndAmount = Input::get("products");
-
 			// send to kassa
-
-
-
 			return Response::json(array('status' => '1'));
 		}
 		
