@@ -1,6 +1,6 @@
 <?php
 
-class APICheckoutController extends \BaseController {
+class APIShoppingCartController extends \BaseController {
 
 
 	public function sendCartToUser()
