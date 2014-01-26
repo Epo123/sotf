@@ -27,7 +27,6 @@ Route::get('logout', 'LoginController@doLogout');
 Route::group(array('before' => 'auth'), function() {
     Route::get('shoppinglist', 'ShoppingcartController@showShoppinglist');
     Route::get('removefromshoppingcart/{itemcode}', 'ShoppingcartController@deleteItem');
-    
+    Route::get('putinshoppingcart/{code}', 'ShoppingcartController@putInShoppingcart');
 });
 
-Route::get('putinshoppingcart/{code}', 'ShoppingcartController@putInShoppingcart');
