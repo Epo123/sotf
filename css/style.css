@@ -1,0 +1,12 @@
+table th.centered { 
+   text-align: center;
+}
+
+table tr td.centered { 
+   text-align: center;
+}
+
+table tr td { 
+   vertical-align:middle;
+}
+
