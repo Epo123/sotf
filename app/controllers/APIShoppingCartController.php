@@ -9,7 +9,7 @@ class APIShoppingCartController extends \BaseController {
 		$email = Input::get("email");
 		$password = Input::get("password");
 
-		$shoppingCart = ShoppingCart::where("user_id", "=", $userid)->get()->first();
+		$shoppingCart = Shoppingcart::where("user_id", "=", $userid)->get()->first();
 		if($shoppingCart){
 			if (Auth::validate(array('email' => $email, 'password' => $password))){
 				
