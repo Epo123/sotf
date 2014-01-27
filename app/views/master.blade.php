@@ -12,18 +12,22 @@
 
 
 <div class="container">
-
-    @if(Auth::check())
-    <a href="{{URL::to('logout')}}" class="pull-right btn btn-danger">Logout</a>
-    <a href="{{URL::to('shoppinglist')}}" class="pull-right btn btn-info">Shoppinglist</a>
-    @else
-    <a href="{{URL::to('login')}}" class="pull-right btn btn-info">Login</a>
-    @endif
-
+    
     @section('header')
     <h1><a href="{{URL::to('/')}}">PPPS</a></h1>
+    
+    <div>
+        <a href="{{URL::to('/')}}" class="btn btn-primary">Producten</a>
+        @if(Auth::check())
+        <a href="{{URL::to('shoppinglist')}}" class="btn btn-primary">Shoppinglist</a>
+        <a href="{{URL::to('logout')}}" class="pull-right btn btn-danger">Logout</a>  
+        @else
+        <a href="{{URL::to('login')}}" class="pull-right btn btn-info">Login</a>
+        @endif
+    </div>
+    
     @show
-
+    
     @if (Session::has('error'))
     <div class="alert alert-danger">
         {{Session::get('error')}}
