@@ -38,6 +38,18 @@ class APIShoppingCartController extends \BaseController {
     public function receiveCartFromApp($code){
         $cashregister = CashRegister::where("code", "=", $code)->get();
 
+        if($code == "Kassa1") {
+            $service_port = 8818;
+        } else if ($code == "Kassa2") {
+            $service_port = 8828;
+        } else if ($code == "Kassa3") {
+            $service_port = 8838;
+        } else if ($code == "Kassa4") {
+            $service_port = 8848;
+        } else if ($code == "Kassa5") {
+            $service_port = 8858;
+        }
+
         if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')))){
             $productAndAmount = json_decode(Input::get("products"));
             $productInformation = array();
@@ -63,8 +75,8 @@ class APIShoppingCartController extends \BaseController {
                     "userInformation" => $userInformation,
                     "products" => $productInformation
                 ));
-                $service_port = 8818;
-                $address = gethostbyaddr('145.37.87.36');
+
+                $address = gethostbyaddr('145.37.57.40');
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
                 $result = socket_connect($socket, $address, $service_port);
                 $in = $cashRegister;
