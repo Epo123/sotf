@@ -76,9 +76,16 @@ class APIShoppingCartController extends \BaseController {
                     "products" => $productInformation
                 ));
 
+                $service_port = 8818;
                 $address = gethostbyaddr('145.37.57.40');
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+                if ($socket === false) {
+                    return Response::json(array('status' => '0'));
+                }
                 $result = socket_connect($socket, $address, $service_port);
+                if ($result === false) {
+                    return Response::json(array('status' => '0'));
+                }
                 $in = $cashRegister;
                 $out = '';
                 socket_write($socket, $in, strlen($in));

@@ -21,10 +21,11 @@ Route::post('api/cart/', 'APIShoppingCartController@sendCartToApp');
 
 Route::get('login', 'LoginController@showLogin');
 Route::post('login', 'LoginController@doLogin');
-Route::get('logout', 'LoginController@doLogout');
+
 
 //Route::get('shoppinglist', 'ShoppingcartController@showShoppinglist');
 Route::group(array('before' => 'auth'), function() {
+	Route::get('logout', 'LoginController@doLogout');
     Route::get('shoppinglist', 'ShoppingcartController@showShoppinglist');
     Route::get('removefromshoppingcart/{itemcode}', 'ShoppingcartController@deleteItem');
     Route::get('putinshoppingcart/{code}', 'ShoppingcartController@putInShoppingcart');
