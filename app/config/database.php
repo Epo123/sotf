@@ -48,10 +48,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '46.21.172.147',
+			'host'      => '127.0.0.1',
 			'database'  => 'erikpvu35_agile',
-			'username'  => 'erikpvu35',
-			'password'  => '0pduqrbc',
+			'username'  => 'root',
+			'password'  => 'hahaha123',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

@@ -76,7 +76,7 @@ class APIShoppingCartController extends \BaseController {
                     "products" => $productInformation
                 ));
 
-                $address = gethostbyaddr('145.37.56.74');
+                $address = gethostbyaddr('127.0.0.1');
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
                 if ($socket === false) {
                     return Response::json(array('status' => '0'));
